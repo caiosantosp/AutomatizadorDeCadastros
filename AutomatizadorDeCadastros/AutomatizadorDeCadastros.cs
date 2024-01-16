@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutomatizadorDeCadastros.Objetos;
+using System;
 using System.Windows.Forms;
 
 namespace AutomatizadorDeCadastros
@@ -29,31 +30,29 @@ namespace AutomatizadorDeCadastros
             {
                 nomeDoCadastro = combotipocadastro.SelectedItem.ToString();
                 nomeDoDiretorio = textdiretoriodoarquivo.Text;
+
+                Processamento.Arquivo.IniciarProcessamentoDoArquivo(nomeDoDiretorio, nomeDoCadastro);
             }
-
-
-            var nomeDoDiretorio3 = nomeDoDiretorio;
-            var nomeDoDiretorio4 = nomeDoCadastro;
         }
 
         private bool CamposEstaoPreenchidosCorretamente()
         {
-            string mensagemDeErro = "";
-
             if (textdiretoriodoarquivo.Text == "")
             {
-                mensagemDeErro = "Preencha o diretório corretamente.";
+                string mensagemDeErro = "Preencha o diretório corretamente.";
 
-                MessageBox.Show(mensagemDeErro);
+                Erro.ProcessarTelaDeErro(mensagemDeErro);
 
                 return false;
             }
 
             if (combotipocadastro.SelectedItem == null)
             {
-                mensagemDeErro = "Selecione o Tipo de Cadastro corretamente.";
+                string mensagemDeErro = "Selecione o Tipo de Cadastro corretamente.";
 
-                MessageBox.Show(mensagemDeErro);
+                //Consulta sql para ver os cadastros disponiveis
+
+                Erro.ProcessarTelaDeErro(mensagemDeErro);
 
                 return false;
             }
